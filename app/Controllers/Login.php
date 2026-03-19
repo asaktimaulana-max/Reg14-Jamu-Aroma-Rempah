@@ -6,10 +6,9 @@ use CodeIgniter\Controller;
 
 class Login extends Controller
 {
-
     public function index()
     {
-        return view('login');
+        return view('auth/login');
     }
 
     public function proses()
@@ -19,42 +18,41 @@ class Login extends Controller
         $username = $this->request->getPost('username');
         $password = $this->request->getPost('password');
 
-        // ambil data user
         $user = $db->table('user')
             ->where('username', $username)
             ->get()
             ->getRowArray();
 
-        // cek user
+        // 🔥 cek user
         if (!$user) {
             return redirect()->back()->with('error', 'Username tidak ditemukan');
         }
 
-        // cek password
+        // 🔥 cek password (sementara masih plain text)
         if ($password != $user['password']) {
             return redirect()->back()->with('error', 'Password salah');
         }
 
-        // buat session login
+        // 🔥 set session
         session()->set([
             'id_user'      => $user['id_user'],
             'username'     => $user['username'],
             'role'         => $user['role'],
-            'id_franchise' => $user['id_franchise'], // penting untuk penjualan
+            'id_franchise' => $user['id_franchise'],
             'logged_in'    => true
         ]);
 
-        // redirect berdasarkan role
+        // 🔥 redirect berdasarkan role
         switch ($user['role']) {
 
             case 'admin':
-                return redirect()->to('/dashboard');
+                return redirect()->to('/admin/dashboard');
 
             case 'mitra':
-                return redirect()->to('/mitra');
+                return redirect()->to('/mitra/dashboard');
 
             case 'owner':
-                return redirect()->to('/owner');
+                return redirect()->to('/owner/dashboard'); // ✅ FIX DI SINI
 
             default:
                 return redirect()->to('/login');

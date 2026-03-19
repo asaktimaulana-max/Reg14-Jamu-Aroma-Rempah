@@ -19,7 +19,7 @@
 
 <h4 class="mb-0">Data Penjualan</h4>
 
-<a href="/penjualan/tambah" class="btn btn-light btn-sm">
+<a href="/mitra/penjualan/tambah" class="btn btn-light btn-sm">
 Tambah Penjualan
 </a>
 
@@ -72,7 +72,7 @@ Rp <?= number_format($p['total'],0,',','.') ?>
 
 </table>
 
-<a href="/dashboard" class="btn btn-secondary">
+<a href="/admin/dashboard" class="btn btn-secondary">
 Kembali ke Dashboard
 </a>
 
@@ -84,3 +84,4 @@ Kembali ke Dashboard
 
 </body>
 </html>
+```

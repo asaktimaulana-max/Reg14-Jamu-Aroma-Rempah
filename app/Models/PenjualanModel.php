@@ -10,8 +10,8 @@ class PenjualanModel extends Model
     protected $primaryKey = 'id_penjualan';
 
     protected $allowedFields = [
-        'id_produk',
         'id_franchise',
+        'id_produk',
         'tanggal',
         'jumlah',
         'total'

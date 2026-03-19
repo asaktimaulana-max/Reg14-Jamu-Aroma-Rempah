@@ -15,7 +15,6 @@ class FranchiseModel extends Model
         'alamat',
         'kota',
         'no_hp',
-        'tanggal_gabung',
         'status'
     ];
 }
