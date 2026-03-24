@@ -31,10 +31,45 @@ class Dashboard extends BaseController
 
         $data['total_omzet'] = $omzet->total ?? 0;
 
-        // semua data penjualan (untuk grafik)
-        $data['penjualan'] = $db->table('penjualan')
+        // 🔥 AMBIL DATA UNTUK GRAFIK (PERBAIKAN UTAMA)
+        $penjualan = $db->table('penjualan')
+            ->select('tanggal, SUM(total) as total')
+            ->groupBy('tanggal')
+            ->orderBy('tanggal','ASC')
             ->get()
             ->getResultArray();
+
+        // 🔥 WAJIB: ubah jadi array chart
+        $labelTanggal = [];
+        $dataPenjualan = [];
+
+        foreach ($penjualan as $p) {
+            $labelTanggal[] = $p['tanggal'];
+            $dataPenjualan[] = $p['total'];
+        }
+
+        // kirim ke view
+        $data['labelTanggal'] = $labelTanggal;
+        $data['dataPenjualan'] = $dataPenjualan;
+
+        // 🔥 DATA PIE CHART (produk terlaris)
+        $produk = $db->table('penjualan')
+            ->select('produk_jamu.nama_produk, SUM(penjualan.jumlah) as total_jual')
+            ->join('produk_jamu','produk_jamu.id_produk = penjualan.id_produk')
+            ->groupBy('produk_jamu.id_produk')
+            ->get()
+            ->getResultArray();
+
+        $namaProduk = [];
+        $totalProduk = [];
+
+        foreach ($produk as $p) {
+            $namaProduk[] = $p['nama_produk'];
+            $totalProduk[] = $p['total_jual'];
+        }
+
+        $data['namaProduk'] = $namaProduk;
+        $data['totalProduk'] = $totalProduk;
 
         // transaksi terbaru
         $data['transaksi_terbaru'] = $db->table('penjualan')
@@ -46,7 +81,7 @@ class Dashboard extends BaseController
             ->get()
             ->getResultArray();
 
-        // produk terlaris
+        // produk terlaris (list)
         $data['produk_terlaris'] = $db->table('penjualan')
             ->select('produk_jamu.nama_produk, SUM(penjualan.jumlah) as total_jual')
             ->join('produk_jamu','produk_jamu.id_produk = penjualan.id_produk')

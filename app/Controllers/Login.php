@@ -23,17 +23,14 @@ class Login extends Controller
             ->get()
             ->getRowArray();
 
-        // 🔥 cek user
         if (!$user) {
             return redirect()->back()->with('error', 'Username tidak ditemukan');
         }
 
-        // 🔥 cek password (sementara masih plain text)
         if ($password != $user['password']) {
             return redirect()->back()->with('error', 'Password salah');
         }
 
-        // 🔥 set session
         session()->set([
             'id_user'      => $user['id_user'],
             'username'     => $user['username'],
@@ -42,18 +39,14 @@ class Login extends Controller
             'logged_in'    => true
         ]);
 
-        // 🔥 redirect berdasarkan role
+        // 🔥 redirect sesuai role
         switch ($user['role']) {
-
             case 'admin':
                 return redirect()->to('/admin/dashboard');
-
             case 'mitra':
                 return redirect()->to('/mitra/dashboard');
-
             case 'owner':
-                return redirect()->to('/owner/dashboard'); // ✅ FIX DI SINI
-
+                return redirect()->to('/owner/dashboard');
             default:
                 return redirect()->to('/login');
         }

@@ -19,14 +19,14 @@
 
         .login-card {
             width: 380px;
-            border-radius: 15px;
-            padding: 30px;
+            border-radius: 25px;
+            padding: 35px;
             background: white;
             box-shadow: 0 10px 25px rgba(0,0,0,0.2);
         }
 
         .logo {
-            width: 160px;
+            width: 170px;
         }
 
         .btn-login {
@@ -45,10 +45,10 @@
 <div class="login-card text-center">
 
     <!-- LOGO -->
-    <img src="/assets/logo.png" class="logo mb-3">
+    <img src="/assets/logo.png" class="logo">
 
     <h4 class="mb-3">Sistem Monitoring Jamu Aroma Rempah</h4>
-    <p class="text-muted mb-4">Silakan login ke sistem</p>
+    <p class="text-muted mb-3">Silakan login ke sistem</p>
 
     <!-- FORM -->
     <form action="<?= base_url('login/proses') ?>" method="post">
