@@ -1,17 +1,89 @@
-<!DOCTYPE html>
-<html>
+<?= $this->extend('admin/layout/template') ?>
+<?= $this->section('content') ?>
 
-<head>
+<style>
 
-<title>Data Franchise</title>
+/* ===== CARD ===== */
+.card-jamu {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+/* ===== TITLE ===== */
+h3 {
+    color: #000; /* HITAM sesuai request */
+    font-weight: 600;
+}
 
-</head>
+/* ===== TABLE ===== */
+.table-jamu {
+    border-radius: 10px;
+    overflow: hidden;
+}
 
-<body>
+/* HEADER */
+.table-jamu thead {
+    background: #2f5d50;
+    color: white;
+}
 
-<div class="container mt-4">
+.table-jamu thead th {
+    padding: 12px;
+}
+
+/* BODY (NO CREAM) */
+.table-jamu tbody tr {
+    background-color: #ffffff;
+}
+
+.table-jamu tbody tr:nth-child(even) {
+    background-color: #f7f7f7;
+}
+
+.table-jamu tbody tr:hover {
+    background-color: #eef7f3;
+    transition: 0.2s;
+}
+
+/* ===== BADGE ===== */
+.badge-aktif {
+    background-color: #3a7d44;
+    color: white;
+}
+
+.badge-nonaktif {
+    background-color: #6c757d;
+    color: white;
+}
+
+/* ===== BUTTON ===== */
+.btn-edit {
+    background-color: #c28f2c;
+    color: white;
+    border: none;
+}
+
+.btn-hapus {
+    background-color: #a94442;
+    color: white;
+    border: none;
+}
+
+.btn-edit:hover,
+.btn-hapus:hover {
+    opacity: 0.9;
+}
+
+.btn-sm {
+    border-radius: 8px;
+    padding: 5px 10px;
+}
+
+</style>
+
+<div class="container-fluid">
 
 <h3 class="mb-4">Data Franchise</h3>
 
@@ -19,16 +91,13 @@
 Tambah Franchise
 </a>
 
-<div class="card shadow">
+<div class="card-jamu">
 
-<div class="card-body">
+<table class="table table-bordered table-jamu">
 
-<table class="table table-bordered table-hover">
-
-<thead class="table-success">
-
+<thead>
 <tr>
-<th>ID</th>
+<th>No</th>
 <th>Nama Cabang</th>
 <th>Pemilik</th>
 <th>Alamat</th>
@@ -37,16 +106,17 @@ Tambah Franchise
 <th>Status</th>
 <th>Aksi</th>
 </tr>
-
 </thead>
 
 <tbody>
 
+<?php $no = 1; ?>
 <?php foreach($franchise as $f): ?>
 
 <tr>
 
-<td><?= $f['id_franchise'] ?></td>
+<td><?= $no++ ?></td>
+
 <td><?= $f['nama_cabang'] ?></td>
 <td><?= $f['pemilik'] ?></td>
 <td><?= $f['alamat'] ?? '-' ?></td>
@@ -54,27 +124,22 @@ Tambah Franchise
 <td><?= $f['no_hp'] ?? '-' ?></td>
 
 <td>
-
 <?php if(($f['status'] ?? '') == 'Aktif'): ?>
-
-<span class="badge bg-success">Aktif</span>
-
+    <span class="badge badge-aktif">Aktif</span>
 <?php else: ?>
-
-<span class="badge bg-secondary">Nonaktif</span>
-
+    <span class="badge badge-nonaktif">Nonaktif</span>
 <?php endif; ?>
-
 </td>
 
 <td>
 
-<a href="/admin/franchise/edit/<?= $f['id_franchise'] ?>" class="btn btn-warning btn-sm">
+<a href="/admin/franchise/edit/<?= $f['id_franchise'] ?>" 
+class="btn btn-edit btn-sm">
 Edit
 </a>
 
 <a href="/admin/franchise/hapus/<?= $f['id_franchise'] ?>" 
-class="btn btn-danger btn-sm"
+class="btn btn-hapus btn-sm"
 onclick="return confirm('Yakin hapus data?')">
 Hapus
 </a>
@@ -93,8 +158,4 @@ Hapus
 
 </div>
 
-</div>
-
-</body>
-
-</html>
+<?= $this->endSection() ?>

@@ -1,69 +1,149 @@
-<!DOCTYPE html>
-<html>
+<?= $this->extend('admin/layout/template') ?>
+<?= $this->section('content') ?>
 
-<head>
+<style>
 
-<title>Data Produk Jamu</title>
+/* ===== CARD ===== */
+.card-jamu {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+/* ===== TITLE ===== */
+h3 {
+    color: #000;
+    font-weight: 600;
+}
 
-</head>
+/* ===== TABLE ===== */
+.table-jamu {
+    border-radius: 10px;
+    overflow: hidden;
+}
 
-<body>
+/* HEADER */
+.table-jamu thead {
+    background: #2f5d50;
+    color: white;
+}
 
-<div class="container mt-4">
+.table-jamu thead th {
+    padding: 12px;
+    text-align: center;
+}
+
+/* BODY */
+.table-jamu tbody tr {
+    background-color: #ffffff;
+}
+
+.table-jamu tbody tr:nth-child(even) {
+    background-color: #f7f7f7;
+}
+
+.table-jamu tbody tr:hover {
+    background-color: #eef7f3;
+    transition: 0.2s;
+}
+
+/* IMAGE */
+.table-jamu img {
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+/* PRICE */
+.text-harga {
+    color: #3a7d44;
+    font-weight: 600;
+}
+
+/* BUTTON */
+.btn-edit {
+    background-color: #c28f2c;
+    color: white;
+    border: none;
+}
+
+.btn-hapus {
+    background-color: #a94442;
+    color: white;
+    border: none;
+}
+
+.btn-edit:hover,
+.btn-hapus:hover {
+    opacity: 0.9;
+}
+
+.btn-sm {
+    border-radius: 8px;
+    padding: 5px 10px;
+}
+
+</style>
+
+<div class="container-fluid">
 
 <h3 class="mb-4">Data Produk Jamu</h3>
 
 <a href="/admin/produk/tambah" class="btn btn-success mb-3">
-Tambah Produk
+    + Tambah Produk
 </a>
 
-<table class="table table-bordered table-striped">
+<div class="card-jamu">
 
-<thead class="table-success">
+<table class="table table-bordered align-middle table-jamu">
 
+<thead>
 <tr>
-
-<th>ID</th>
+<th style="width:60px;">No</th>
 <th>Nama Produk</th>
 <th>Harga</th>
 <th>Foto</th>
 <th>Khasiat</th>
-<th>Aksi</th>
-
+<th style="width:150px;">Aksi</th>
 </tr>
-
 </thead>
 
 <tbody>
 
+<?php $no = 1; ?>
 <?php foreach($produk as $p): ?>
 
 <tr>
 
-<td><?= $p['id_produk'] ?></td>
-<td><?= $p['nama_produk'] ?></td>
-<td>Rp <?= number_format($p['harga']) ?></td>
+<td class="text-center fw-bold"><?= $no++ ?></td>
 
-<td>
+<td><?= $p['nama_produk'] ?></td>
+
+<td class="text-harga">
+    Rp <?= number_format($p['harga'],0,',','.') ?>
+</td>
+
+<td class="text-center">
 <?php if($p['foto']) : ?>
-<img src="/uploads/<?= $p['foto'] ?>" width="80">
+    <img src="/uploads/<?= $p['foto'] ?>" width="80">
+<?php else: ?>
+    <span class="text-muted">-</span>
 <?php endif; ?>
 </td>
 
 <td><?= $p['khasiat'] ?></td>
 
-<td>
+<td class="text-center">
 
-<a href="/admin/produk/edit/<?= $p['id_produk'] ?>" class="btn btn-warning btn-sm">
-Edit
+<a href="/admin/produk/edit/<?= $p['id_produk'] ?>" 
+class="btn btn-edit btn-sm">
+    Edit
 </a>
 
 <a href="/admin/produk/hapus/<?= $p['id_produk'] ?>" 
-class="btn btn-danger btn-sm"
+class="btn btn-hapus btn-sm"
 onclick="return confirm('Yakin hapus data?')">
-Hapus
+    Hapus
 </a>
 
 </td>
@@ -78,5 +158,6 @@ Hapus
 
 </div>
 
-</body>
-</html>
+</div>
+
+<?= $this->endSection() ?>

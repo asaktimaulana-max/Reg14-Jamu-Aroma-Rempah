@@ -32,7 +32,7 @@
 <th>No</th>
 <th>Periode</th>
 <th>Nama Cabang</th>
-<th>Total Omset</th>
+<th>Total Omzet</th>
 <th>Mitra (80%)</th>
 <th>Pusat (20%)</th>
 </tr>

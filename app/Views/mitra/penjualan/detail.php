@@ -1,44 +1,73 @@
 <?= $this->extend('mitra/layout/template') ?>
 <?= $this->section('content') ?>
 
-<h3 class="mb-3">Detail Transaksi</h3>
+<h3 class="mb-4 fw-semibold">Detail Transaksi</h3>
 
-<div class="card mb-3 shadow-sm">
+<!-- 🔥 HEADER -->
+<div class="card shadow-sm border-0 mb-4">
     <div class="card-body">
-        <p><b>Tanggal:</b> <?= $header['tanggal'] ?></p>
-        <p><b>Total:</b> Rp <?= number_format($header['total'],0,',','.') ?></p>
+        <div class="row">
+            <div class="col-md-6">
+                <p class="mb-1"><b>Tanggal:</b></p>
+                <h6><?= $header['tanggal'] ?></h6>
+            </div>
+
+            <div class="col-md-6 text-end">
+                <p class="mb-1"><b>Total Transaksi:</b></p>
+                <h5 class="text-success">
+                    Rp <?= number_format($header['total'],0,',','.') ?>
+                </h5>
+            </div>
+        </div>
     </div>
 </div>
 
-<div class="card shadow-sm">
-<div class="card-body">
+<!-- 🔥 DETAIL PRODUK -->
+<div class="card shadow-sm border-0">
+    <div class="card-body">
 
-<table class="table table-bordered">
-<tr>
-    <th>Produk</th>
-    <th>Qty</th>
-    <th>Harga</th>
-    <th>Subtotal</th>
-</tr>
+        <h5 class="mb-3">Daftar Produk</h5>
 
-<?php foreach($detail as $d){ ?>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover align-middle text-center">
 
-<tr>
-    <td><?= $d['nama_produk'] ?></td>
-    <td><?= $d['qty'] ?></td>
-    <td>Rp <?= number_format($d['harga'],0,',','.') ?></td>
-    <td>Rp <?= number_format($d['subtotal'],0,',','.') ?></td>
-</tr>
+                <thead class="table-success">
+                    <tr>
+                        <th>No</th>
+                        <th>Produk</th>
+                        <th>Qty</th>
+                        <th>Harga</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </thead>
 
-<?php } ?>
+                <tbody>
 
-</table>
+                <?php $no = 1; foreach($detail as $d){ ?>
 
+                    <tr>
+                        <td><?= $no++ ?></td>
+                        <td class="text-start"><?= $d['nama_produk'] ?></td>
+                        <td><?= $d['qty'] ?></td>
+                        <td>Rp <?= number_format($d['harga'],0,',','.') ?></td>
+                        <td class="fw-semibold text-success">
+                            Rp <?= number_format($d['subtotal'],0,',','.') ?>
+                        </td>
+                    </tr>
+
+                <?php } ?>
+
+                </tbody>
+
+            </table>
+        </div>
+
+    </div>
 </div>
-</div>
 
+<!-- 🔥 BUTTON -->
 <a href="<?= base_url('mitra/penjualan') ?>" class="btn btn-secondary mt-3">
-Kembali
+    ← Kembali
 </a>
 
 <?= $this->endSection() ?>

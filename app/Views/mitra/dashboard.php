@@ -54,7 +54,7 @@
     <div class="col-md-6">
         <div class="card shadow-sm border-0">
             <div class="card-body">
-                <h5 class="mb-3">Omset Bulanan</h5>
+                <h5 class="mb-3">Omzet Bulanan</h5>
 
                 <div style="height:300px;">
                     <canvas id="chartBar"></canvas>
@@ -90,7 +90,7 @@ new Chart(document.getElementById('chartBar'), {
     data: {
         labels: <?= json_encode($bulan ?? []) ?>,
         datasets: [{
-            label: 'Omset',
+            label: 'Omzet',
             data: <?= json_encode($total ?? []) ?>,
             backgroundColor: '#3498db',
             borderRadius: 6

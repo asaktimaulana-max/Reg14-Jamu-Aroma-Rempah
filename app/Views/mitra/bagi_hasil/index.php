@@ -25,7 +25,7 @@ Generate Bagi Hasil Bulan Ini
 <tr>
 <th>No</th>
 <th>Periode</th>
-<th>Total Omset</th>
+<th>Total Omzet</th>
 <th>Bagian Mitra (80%)</th>
 <th>Bagian Pusat (20%)</th>
 </tr>

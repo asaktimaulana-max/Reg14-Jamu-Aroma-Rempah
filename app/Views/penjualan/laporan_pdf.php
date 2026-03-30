@@ -1,27 +1,40 @@
-<h2>Laporan Penjualan Jamu Aroma</h2>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Laporan Penjualan</title>
+    <style>
+        body { font-family: sans-serif; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid #000; padding: 8px; text-align: center; }
+    </style>
+</head>
 
-<table border="1" width="100%" cellpadding="5">
+<body>
 
+<h3>Laporan Penjualan</h3>
+
+<table>
 <tr>
-
-<th>ID</th>
-<th>Tanggal</th>
-<th>Jumlah</th>
-<th>Total</th>
-
+    <th>No</th>
+    <th>ID</th>
+    <th>Cabang</th>
+    <th>Tanggal</th>
+    <th>Total</th>
 </tr>
 
-<?php foreach($penjualan as $p): ?>
+<?php $no=1; foreach($penjualan as $p): ?>
 
 <tr>
-
-<td><?= $p['id_penjualan'] ?></td>
-<td><?= $p['tanggal'] ?></td>
-<td><?= $p['jumlah'] ?></td>
-<td><?= $p['total'] ?></td>
-
+    <td><?= $no++ ?></td>
+    <td><?= $p['id_penjualan'] ?></td>
+    <td><?= $p['nama_cabang'] ?? '-' ?></td>
+    <td><?= $p['tanggal'] ?></td>
+    <td><?= number_format($p['total'],0,',','.') ?></td>
 </tr>
 
 <?php endforeach; ?>
 
 </table>
+
+</body>
+</html>

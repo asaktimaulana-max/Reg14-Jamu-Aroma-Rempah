@@ -33,7 +33,7 @@
 
 <body>
 
-<h3>LAPORAN OMSET CABANG</h3>
+<h3>LAPORAN OMZET CABANG</h3>
 
 <?php
 $periodeText = !empty($periode) 
@@ -47,7 +47,7 @@ $periodeText = !empty($periode)
 <tr>
 <th>No</th>
 <th>Cabang</th>
-<th>Total Omset</th>
+<th>Total Omzet</th>
 </tr>
 
 <?php if(empty($laporan)){ ?>

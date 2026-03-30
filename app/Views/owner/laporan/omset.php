@@ -35,7 +35,7 @@ Export PDF
 <th>No</th>
 <th>Periode</th>
 <th>Nama Cabang</th>
-<th>Total Omset</th>
+<th>Total Omzet</th>
 </tr>
 </thead>
 

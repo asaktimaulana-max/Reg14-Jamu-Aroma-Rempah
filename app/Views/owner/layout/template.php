@@ -70,7 +70,7 @@
 
             <li class="nav-item">
                 <a href="<?= base_url('owner/laporan/omset') ?>" class="nav-link">
-                    <i class="bi bi-bar-chart"></i> Laporan Omset
+                    <i class="bi bi-bar-chart"></i> Laporan Omzet
                 </a>
             </li>
 

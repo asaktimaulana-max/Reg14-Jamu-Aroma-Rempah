@@ -14,16 +14,14 @@ class Dashboard extends BaseController
 
         $db = \Config\Database::connect();
 
-        // total franchise
+        /* =========================
+           TOTAL DATA
+        ========================== */
+
         $data['total_franchise'] = $db->table('franchise')->countAllResults();
-
-        // total produk
-        $data['total_produk'] = $db->table('produk_jamu')->countAllResults();
-
-        // total transaksi
+        $data['total_produk']    = $db->table('produk_jamu')->countAllResults();
         $data['total_transaksi'] = $db->table('penjualan')->countAllResults();
 
-        // total omzet
         $omzet = $db->table('penjualan')
             ->selectSum('total')
             ->get()
@@ -31,15 +29,17 @@ class Dashboard extends BaseController
 
         $data['total_omzet'] = $omzet->total ?? 0;
 
-        // 🔥 AMBIL DATA UNTUK GRAFIK (PERBAIKAN UTAMA)
+        /* =========================
+           GRAFIK PENJUALAN
+        ========================== */
+
         $penjualan = $db->table('penjualan')
-            ->select('tanggal, SUM(total) as total')
-            ->groupBy('tanggal')
+            ->select('DATE(tanggal) as tanggal, SUM(total) as total')
+            ->groupBy('DATE(tanggal)')
             ->orderBy('tanggal','ASC')
             ->get()
             ->getResultArray();
 
-        // 🔥 WAJIB: ubah jadi array chart
         $labelTanggal = [];
         $dataPenjualan = [];
 
@@ -48,15 +48,17 @@ class Dashboard extends BaseController
             $dataPenjualan[] = $p['total'];
         }
 
-        // kirim ke view
         $data['labelTanggal'] = $labelTanggal;
         $data['dataPenjualan'] = $dataPenjualan;
 
-        // 🔥 DATA PIE CHART (produk terlaris)
-        $produk = $db->table('penjualan')
-            ->select('produk_jamu.nama_produk, SUM(penjualan.jumlah) as total_jual')
-            ->join('produk_jamu','produk_jamu.id_produk = penjualan.id_produk')
-            ->groupBy('produk_jamu.id_produk')
+        /* =========================
+           PIE CHART PRODUK (AMAN)
+        ========================== */
+
+        $produk = $db->table('detail_penjualan')
+            ->select('produk_jamu.nama_produk, SUM(detail_penjualan.qty) as total_jual')
+            ->join('produk_jamu','produk_jamu.id_produk = detail_penjualan.id_produk','left')
+            ->groupBy('detail_penjualan.id_produk')
             ->get()
             ->getResultArray();
 
@@ -64,38 +66,46 @@ class Dashboard extends BaseController
         $totalProduk = [];
 
         foreach ($produk as $p) {
-            $namaProduk[] = $p['nama_produk'];
+            $namaProduk[] = $p['nama_produk'] ?? 'Tidak diketahui';
             $totalProduk[] = $p['total_jual'];
         }
 
         $data['namaProduk'] = $namaProduk;
         $data['totalProduk'] = $totalProduk;
 
-        // transaksi terbaru
+        /* =========================
+           TRANSAKSI TERBARU (FIX)
+        ========================== */
+
         $data['transaksi_terbaru'] = $db->table('penjualan')
-            ->select('penjualan.id_penjualan, penjualan.tanggal, penjualan.total, franchise.nama_cabang, produk_jamu.nama_produk')
-            ->join('franchise','franchise.id_franchise = penjualan.id_franchise')
-            ->join('produk_jamu','produk_jamu.id_produk = penjualan.id_produk')
+            ->select('penjualan.id_penjualan, penjualan.tanggal, penjualan.total, franchise.nama_cabang')
+            ->join('franchise','franchise.id_franchise = penjualan.id_franchise','left')
             ->orderBy('penjualan.id_penjualan','DESC')
             ->limit(5)
             ->get()
             ->getResultArray();
 
-        // produk terlaris (list)
-        $data['produk_terlaris'] = $db->table('penjualan')
-            ->select('produk_jamu.nama_produk, SUM(penjualan.jumlah) as total_jual')
-            ->join('produk_jamu','produk_jamu.id_produk = penjualan.id_produk')
-            ->groupBy('produk_jamu.id_produk')
+        /* =========================
+           PRODUK TERLARIS (LIST)
+        ========================== */
+
+        $data['produk_terlaris'] = $db->table('detail_penjualan')
+            ->select('produk_jamu.nama_produk, SUM(detail_penjualan.qty) as total_jual')
+            ->join('produk_jamu','produk_jamu.id_produk = detail_penjualan.id_produk','left')
+            ->groupBy('detail_penjualan.id_produk')
             ->orderBy('total_jual','DESC')
             ->limit(5)
             ->get()
             ->getResultArray();
 
-        // cabang terlaris
+        /* =========================
+           CABANG TERLARIS
+        ========================== */
+
         $data['cabang_terlaris'] = $db->table('penjualan')
             ->select('franchise.nama_cabang, SUM(penjualan.total) as total_penjualan')
-            ->join('franchise','franchise.id_franchise = penjualan.id_franchise')
-            ->groupBy('franchise.id_franchise')
+            ->join('franchise','franchise.id_franchise = penjualan.id_franchise','left')
+            ->groupBy('penjualan.id_franchise')
             ->orderBy('total_penjualan','DESC')
             ->limit(5)
             ->get()

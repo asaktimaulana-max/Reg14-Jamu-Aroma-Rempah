@@ -120,3 +120,5 @@ $routes->post('penjualan/simpan','Penjualan::simpan');
 
 $routes->get('laporan','Penjualan::laporan');
 $routes->get('laporan/pdf','Penjualan::exportPDF');
+
+$routes->get('penjualan/detail/(:num)', 'Penjualan::detail/$1');

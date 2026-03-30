@@ -1,52 +1,118 @@
-<!DOCTYPE html>
-<html>
+<?= $this->extend('admin/layout/template') ?>
+<?= $this->section('content') ?>
 
-<head>
+<div class="container-fluid">
 
-<title>Laporan Penjualan</title>
+<div class="card shadow">
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
+    <h4 class="mb-0">Laporan Penjualan</h4>
 
-</head>
+    <a href="/laporan/pdf?cabang=<?= $filterCabang ?>" class="btn btn-danger btn-sm">
+        Export PDF
+    </a>
+</div>
 
-<body>
+<div class="card-body">
 
-<div class="container mt-4">
+<!-- 🔥 FILTER CABANG -->
+<form method="get" class="row mb-3">
 
-<h3>Laporan Penjualan</h3>
+    <div class="col-md-4">
+        <select name="cabang" class="form-control">
+            <option value="">-- Semua Cabang --</option>
 
-<a href="/laporan/pdf" class="btn btn-danger mb-3">
-Export PDF
-</a>
+            <?php foreach($listCabang as $c): ?>
+                <option value="<?= $c['id_franchise'] ?>"
+                    <?= ($filterCabang == $c['id_franchise']) ? 'selected' : '' ?>>
+                    <?= $c['nama_cabang'] ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
+    </div>
 
-<table class="table table-bordered">
+    <div class="col-md-2">
+        <button class="btn btn-success">Filter</button>
+    </div>
 
+    <div class="col-md-2">
+        <a href="/laporan" class="btn btn-secondary">Reset</a>
+    </div>
+
+</form>
+
+<!-- 🔥 TABEL -->
+<table class="table table-bordered table-striped text-center align-middle">
+
+<thead class="table-dark">
 <tr>
-
+<th>No</th>
 <th>ID</th>
+<th>Cabang</th>
 <th>Tanggal</th>
-<th>Jumlah</th>
 <th>Total</th>
-
 </tr>
+</thead>
 
-<?php foreach($penjualan as $p): ?>
+<tbody>
+
+<?php if(!empty($penjualan)): ?>
+
+<?php 
+$no = 1 + (10 * (($currentPage ?? 1) - 1)); 
+foreach($penjualan as $p): 
+?>
 
 <tr>
-
+<td><?= $no++ ?></td>
 <td><?= $p['id_penjualan'] ?></td>
+<td><?= $p['nama_cabang'] ?? '-' ?></td>
 <td><?= $p['tanggal'] ?></td>
-<td><?= $p['jumlah'] ?></td>
-<td>Rp <?= number_format($p['total']) ?></td>
-
+<td>Rp <?= number_format($p['total'],0,',','.') ?></td>
 </tr>
 
 <?php endforeach; ?>
 
+<?php else: ?>
+
+<tr>
+<td colspan="5">Tidak ada data penjualan</td>
+</tr>
+
+<?php endif; ?>
+
+</tbody>
+
 </table>
+
+<!-- 🔥 PAGINATION MANUAL -->
+<div class="d-flex justify-content-center mt-3">
+
+<?php if($currentPage > 1): ?>
+    <a href="?cabang=<?= $filterCabang ?>&page_laporan=<?= $currentPage - 1 ?>" class="btn btn-secondary btn-sm me-1">
+        Prev
+    </a>
+<?php endif; ?>
+
+<?php for($i=1; $i <= $totalPage; $i++): ?>
+    <a href="?cabang=<?= $filterCabang ?>&page_laporan=<?= $i ?>"
+       class="btn btn-sm me-1 <?= ($i == $currentPage) ? 'btn-success' : 'btn-outline-secondary' ?>">
+        <?= $i ?>
+    </a>
+<?php endfor; ?>
+
+<?php if($currentPage < $totalPage): ?>
+    <a href="?cabang=<?= $filterCabang ?>&page_laporan=<?= $currentPage + 1 ?>" class="btn btn-secondary btn-sm">
+        Next
+    </a>
+<?php endif; ?>
 
 </div>
 
-</body>
+</div>
 
-</html>
+</div>
+
+</div>
+
+<?= $this->endSection() ?>

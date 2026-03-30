@@ -8,7 +8,7 @@
     <div class="col-md-4">
         <div class="card text-white shadow-sm border-0" style="background: linear-gradient(45deg,#1e6448);">
             <div class="card-body">
-                <h6>Total Omset</h6>
+                <h6>Total Omzet</h6>
                 <h3>Rp <?= number_format($totalOmset,0,',','.') ?></h3>
             </div>
         </div>
@@ -40,7 +40,7 @@
     <div class="col-md-6">
         <div class="card shadow-sm border-0">
             <div class="card-body">
-                <h6>Omset Bulanan</h6>
+                <h6>Omzet Bulanan</h6>
                 <div style="height:250px;">
                     <canvas id="chartOmset"></canvas>
                 </div>
@@ -51,7 +51,7 @@
     <div class="col-md-6">
         <div class="card shadow-sm border-0">
             <div class="card-body">
-                <h6>Omset Per Cabang</h6>
+                <h6>Omzet Per Cabang</h6>
                 <div style="height:250px;">
                     <canvas id="chartCabang"></canvas>
                 </div>
@@ -101,7 +101,7 @@ new Chart(document.getElementById('chartOmset'), {
     data: {
         labels: <?= json_encode($bulan) ?>,
         datasets: [{
-            label: 'Omset',
+            label: 'Omzet',
             data: <?= json_encode($total) ?>,
             backgroundColor: '#1abc9c'
         }]
@@ -117,7 +117,7 @@ new Chart(document.getElementById('chartCabang'), {
     data: {
         labels: <?= json_encode($namaCabang) ?>,
         datasets: [{
-            label: 'Omset Cabang',
+            label: 'Omzet Cabang',
             data: <?= json_encode($totalCabangChart) ?>,
             backgroundColor: '#3498db'
         }]
