@@ -11,7 +11,7 @@ class Dashboard extends BaseController
         $db = \Config\Database::connect();
         $id_franchise = session()->get('id_franchise');
 
-        // 🔥 TOTAL PENJUALAN
+        // TOTAL PENJUALAN
         $total_penjualan = $db->table('penjualan')
             ->selectSum('total')
             ->where('id_franchise', $id_franchise)
@@ -19,16 +19,16 @@ class Dashboard extends BaseController
             ->getRow()
             ->total ?? 0;
 
-        // 🔥 TOTAL PESANAN
+        // TOTAL PESANAN
         $total_pesanan = $db->table('pemesanan_bahan')
             ->where('id_franchise', $id_franchise)
             ->countAllResults();
 
-        // 🔥 BAGI HASIL
+        // BAGI HASIL
         $bagian_mitra = $total_penjualan * 0.8;
         $bagian_pusat = $total_penjualan * 0.2;
 
-        // 🔥 PIE CHART PRODUK TERLARIS
+        // PIE CHART PRODUK TERLARIS
         $produk = $db->table('detail_penjualan d')
             ->select('p.nama_produk, SUM(d.qty) as total')
             ->join('produk_jamu p', 'p.id_produk = d.id_produk')
@@ -46,7 +46,7 @@ class Dashboard extends BaseController
             $totalProduk[] = (int)$row->total;
         }
 
-        // 🔥 GRAFIK OMSET BULANAN
+        // GRAFIK OMSET BULANAN
         $grafik = $db->table('penjualan')
             ->select("DATE_FORMAT(tanggal,'%Y-%m') as bulan, SUM(total) as total")
             ->where('id_franchise', $id_franchise)

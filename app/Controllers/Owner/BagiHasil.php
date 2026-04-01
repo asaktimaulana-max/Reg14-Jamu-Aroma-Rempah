@@ -10,13 +10,13 @@ class BagiHasil extends BaseController
     {
         $db = \Config\Database::connect();
 
-        // 🔥 ambil input filter dari URL
+        // ambil input filter dari URL
         $periode = $this->request->getGet('periode');
 
         $builder = $db->table('bagi_hasil bh')
             ->join('franchise f', 'f.id_franchise = bh.id_franchise');
 
-        // 🔥 kalau ada filter
+        // kalau ada filter
         if ($periode) {
             $builder->where('bh.periode', $periode);
         }
@@ -26,7 +26,7 @@ class BagiHasil extends BaseController
             ->get()
             ->getResultArray();
 
-        // kirim periode ke view (biar selected tetap)
+        // kirim periode ke view 
         $data['periode'] = $periode;
 
         return view('owner/bagi_hasil/index', $data);

@@ -34,7 +34,7 @@
 
 </div>
 
-<!-- 🔥 GRAFIK -->
+<!-- GRAFIK -->
 <div class="row mt-4">
 
     <div class="col-md-6">
@@ -61,7 +61,7 @@
 
 </div>
 
-<!-- 🔥 RANKING -->
+<!-- RANKING -->
 <div class="card mt-4 shadow-sm border-0">
     <div class="card-body">
         <h5>🏆 Ranking Cabang</h5>

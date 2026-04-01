@@ -43,7 +43,7 @@
 
 </div>
 
-<!-- 🔥 GRAFIK -->
+<!-- GRAFIK -->
 <div class="row mt-4">
 
     <!-- BAR -->
@@ -66,7 +66,7 @@
             <div class="card-body">
                 <h6>Produk Terlaris</h6>
 
-                <!-- 🔥 FIX SIZE -->
+                <!-- FIX SIZE -->
                 <div style="height:250px; max-width:300px; margin:auto; position:relative;">
                     <canvas id="chartProduk"></canvas>
                 </div>
@@ -80,7 +80,7 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
-// 🔥 BAR CHART
+// BAR CHART
 new Chart(document.getElementById('chartPenjualan'), {
     type: 'bar',
     data: {
@@ -98,7 +98,7 @@ new Chart(document.getElementById('chartPenjualan'), {
     }
 });
 
-// 🔥 PIE CHART (SUDAH FIX)
+// PIE CHART (SUDAH FIX)
 new Chart(document.getElementById('chartProduk'), {
     type: 'pie',
     data: {

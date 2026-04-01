@@ -16,18 +16,18 @@ class Penjualan extends BaseController
         $builder = $db->table('penjualan')
             ->where('id_franchise', $idFranchise);
 
-        // 🔥 FILTER BULAN
+        // FILTER BULAN
         if ($bulan) {
             $builder->where("DATE_FORMAT(tanggal,'%Y-%m')", $bulan);
         }
 
-        // 🔥 DATA TABEL
+        // DATA TABEL
         $data['penjualan'] = $builder
             ->orderBy('tanggal', 'DESC')
             ->get()
             ->getResultArray();
 
-        // 🔥 GRAFIK
+        // GRAFIK
         $grafik = $db->table('penjualan')
             ->select("DATE_FORMAT(tanggal,'%Y-%m') as bulan, SUM(total) as total")
             ->where('id_franchise', $idFranchise)
@@ -48,13 +48,13 @@ class Penjualan extends BaseController
     {
         $db = \Config\Database::connect();
 
-        // 🔥 HEADER
+        // HEADER
         $data['header'] = $db->table('penjualan')
             ->where('id_penjualan', $id)
             ->get()
             ->getRowArray();
 
-        // 🔥 DETAIL PRODUK
+        // DETAIL PRODUK
         $data['detail'] = $db->table('detail_penjualan d')
             ->select('p.nama_produk, d.qty, d.harga, (d.qty * d.harga) as subtotal')
             ->join('produk_jamu p', 'p.id_produk = d.id_produk')
@@ -84,14 +84,14 @@ class Penjualan extends BaseController
 
         $idFranchise = session()->get('id_franchise');
 
-        // 🔥 VALIDASI DASAR
+        // VALIDASI DASAR
         if (!$produk || !$qty || !$tanggal) {
             return redirect()->back()->with('error', 'Data tidak lengkap');
         }
 
         $total = 0;
 
-        // 🔥 HITUNG TOTAL
+        // HITUNG TOTAL
         foreach ($produk as $i => $idProduk) {
 
             if (empty($idProduk) || empty($qty[$i])) continue;
@@ -106,7 +106,7 @@ class Penjualan extends BaseController
             $total += $dataProduk['harga'] * $qty[$i];
         }
 
-        // 🔥 INSERT HEADER PENJUALAN
+        // INSERT HEADER PENJUALAN
         $db->table('penjualan')->insert([
             'tanggal'       => $tanggal,
             'id_franchise'  => $idFranchise,
@@ -115,7 +115,7 @@ class Penjualan extends BaseController
 
         $idPenjualan = $db->insertID();
 
-        // 🔥 INSERT DETAIL PRODUK
+        // INSERT DETAIL PRODUK
         foreach ($produk as $i => $idProduk) {
 
             if (empty($idProduk) || empty($qty[$i])) continue;

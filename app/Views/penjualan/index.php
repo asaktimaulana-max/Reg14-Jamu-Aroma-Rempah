@@ -11,7 +11,7 @@
 
 <div class="card-body p-3">
 
-<!-- 🔥 FILTER -->
+<!-- FILTER -->
 <form method="get" class="row g-2 mb-3">
 
 <div class="col-md-3">
@@ -44,7 +44,7 @@
 
 </form>
 
-<!-- 🔥 TABLE (ANTI SCROLL) -->
+<!-- TABLE (ANTI SCROLL) -->
 <div class="table-responsive">
 
 <table class="table table-sm table-striped table-bordered text-center align-middle mb-0">
@@ -100,7 +100,7 @@ Detail
 
 </div>
 
-<!-- 🔥 PAGINATION SIMPLE (NO SCROLL) -->
+<!-- PAGINATION SIMPLE (NO SCROLL) -->
 <div class="d-flex justify-content-between align-items-center mt-3">
 
 <?php if($currentPage > 1): ?>

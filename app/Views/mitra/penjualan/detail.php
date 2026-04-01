@@ -3,7 +3,7 @@
 
 <h3 class="mb-4 fw-semibold">Detail Transaksi</h3>
 
-<!-- 🔥 HEADER -->
+<!-- HEADER -->
 <div class="card shadow-sm border-0 mb-4">
     <div class="card-body">
         <div class="row">
@@ -22,7 +22,7 @@
     </div>
 </div>
 
-<!-- 🔥 DETAIL PRODUK -->
+<!-- DETAIL PRODUK -->
 <div class="card shadow-sm border-0">
     <div class="card-body">
 
@@ -65,7 +65,7 @@
     </div>
 </div>
 
-<!-- 🔥 BUTTON -->
+<!-- BUTTON -->
 <a href="<?= base_url('mitra/penjualan') ?>" class="btn btn-secondary mt-3">
     ← Kembali
 </a>

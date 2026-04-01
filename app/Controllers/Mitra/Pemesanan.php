@@ -11,7 +11,7 @@ class Pemesanan extends BaseController
         $db = \Config\Database::connect();
 
         $data['pesanan'] = $db->table('pemesanan_bahan p')
-            ->select('p.*, b.nama_bahan, f.nama_cabang') // 🔥 WAJIB ADA
+            ->select('p.*, b.nama_bahan, f.nama_cabang') 
             ->join('bahan_baku b', 'b.id_bahan = p.id_bahan')
             ->join('franchise f', 'f.id_franchise = p.id_franchise')
             ->where('p.id_franchise', session()->get('id_franchise'))
@@ -39,7 +39,7 @@ class Pemesanan extends BaseController
             'id_bahan'      => $this->request->getPost('id_bahan'),
             'jumlah'        => $this->request->getPost('jumlah'),
             'tanggal_pesan' => date('Y-m-d'),
-            'status'        => 'menunggu' // 🔥 FIX
+            'status'        => 'menunggu' 
         ]);
     
         return redirect()->to('/mitra/pemesanan');

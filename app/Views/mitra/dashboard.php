@@ -6,7 +6,7 @@
 
 <h3 class="mb-4 fw-semibold">Dashboard Mitra</h3>
 
-<!-- 🔥 CARD -->
+<!-- CARD -->
 <div class="row g-4">
 
     <div class="col-md-3">
@@ -47,7 +47,7 @@
 
 </div>
 
-<!-- 🔥 GRAFIK SEJAJAR -->
+<!-- GRAFIK SEJAJAR -->
 <div class="row mt-4 g-4">
 
     <!-- BAR CHART -->
@@ -80,11 +80,11 @@
 
 </div>
 
-<!-- 🔥 CHART JS -->
+<!-- CHART JS -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
-// 🔥 BAR CHART
+// BAR CHART
 new Chart(document.getElementById('chartBar'), {
     type: 'bar',
     data: {
@@ -102,7 +102,7 @@ new Chart(document.getElementById('chartBar'), {
     }
 });
 
-// 🔥 PIE CHART
+// PIE CHART
 new Chart(document.getElementById('chartPie'), {
     type: 'pie',
     data: {

@@ -29,7 +29,7 @@ class Laporan extends BaseController
             ->get()
             ->getResultArray();
 
-        // 🔥 DATA GRAFIK (IKUT FILTER)
+        // DATA GRAFIK (IKUT FILTER)
         $grafikBuilder = $db->table('penjualan');
 
         if (!empty($periode)) {

@@ -20,7 +20,7 @@
 .table-jamu thead {
     background: linear-gradient(135deg, #2f5d50, #4e7c59);
     color: #fff;
-    border-bottom: 3px solid #c28f2c; /* aksen kunyit 🔥 */
+    border-bottom: 3px solid #c28f2c;
 }
 
 .table-jamu thead th {
@@ -69,7 +69,6 @@
     opacity: 0.9;
 }
 
-/* tombol lebih modern */
 .btn-proses,
 .btn-kirim,
 .btn-selesai,

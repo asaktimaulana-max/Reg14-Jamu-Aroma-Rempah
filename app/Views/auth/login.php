@@ -18,7 +18,7 @@
         }
 
         .login-card {
-            width: 380px;
+            width: 400px;
             border-radius: 25px;
             padding: 35px;
             background: white;
@@ -47,7 +47,7 @@
     <!-- LOGO -->
     <img src="/assets/logo.png" class="logo">
 
-    <h4 class="mb-3">Sistem Monitoring Jamu Aroma Rempah</h4>
+    <h4 class="mb-3">Sistem Monitoring Franchise Jamu Aroma Rempah</h4>
     <p class="text-muted mb-3">Silakan login ke sistem</p>
 
     <!-- FORM -->

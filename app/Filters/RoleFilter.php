@@ -10,8 +10,6 @@ class RoleFilter implements FilterInterface
 {
     public function before(RequestInterface $request, $arguments = null)
     {
-        // 🔥 DEBUG (sementara)
-        // dd(session()->get());
 
         // cek login
         if (!session()->has('logged_in')) {

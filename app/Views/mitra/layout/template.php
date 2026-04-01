@@ -63,17 +63,17 @@ body {
 
 <style>
 :root {
-    --sidebar-width: 260px; /* 🔥 UBAH LEBAR SIDEBAR DI SINI */
+    --sidebar-width: 260px; /*UBAH LEBAR SIDEBAR*/
 }
 
-/* 🔥 BACKGROUND UTAMA (GANTI DI SINI) */
+/* BACKGROUND UTAMA */
 body {
     margin: 0;
     overflow-x: hidden;
-    background: #e0dfde; /* ← GANTI WARNA DI SINI */
+    background: #e0dfde; 
 }
 
-/* 🔥 SIDEBAR */
+/* SIDEBAR */
 .sidebar {
     width: var(--sidebar-width);
     height: 100vh;
@@ -85,13 +85,13 @@ body {
     padding-top: 20px;
 }
 
-/* 🔥 CONTENT (AUTO NGIKUT SIDEBAR) */
+/* CONTENT (AUTO NGIKUT SIDEBAR) */
 .content {
     margin-left: var(--sidebar-width);
     padding: 20px;
 }
 
-/* 🔥 MENU */
+/* MENU */
 .sidebar a {
     color: #ecf0f1;
     padding: 12px;
@@ -112,7 +112,7 @@ body {
     background-color: #1abc9c;
 }
 
-/* 🔥 CARD BIAR LEBIH MODERN */
+/* CARD BIAR LEBIH MODERN */
 .card {
     border: none;
     border-radius: 12px;
@@ -124,7 +124,7 @@ body {
 
 <body>
 
-<!-- 🔥 SIDEBAR -->
+<!-- SIDEBAR -->
 <div class="sidebar">
 
     <div class="text-center mb-4">
@@ -160,7 +160,7 @@ body {
 
 </div>
 
-<!-- 🔥 CONTENT -->
+<!-- CONTENT -->
 <div class="content">
     <?= $this->renderSection('content') ?>
 </div>

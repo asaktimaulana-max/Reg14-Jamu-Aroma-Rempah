@@ -17,10 +17,10 @@ class Pemesanan extends BaseController
             ->get()
             ->getResultArray();
 
-        return view('admin/pemesanan/index', $data); // ✅ FIX
+        return view('admin/pemesanan/index', $data); 
     }
 
-    // 🔥 PROSES (belum kirim)
+    // PROSES (belum kirim)
     public function proses($id)
     {
         $db = \Config\Database::connect();
@@ -31,10 +31,10 @@ class Pemesanan extends BaseController
                 'status' => 'diproses'
             ]);
 
-        return redirect()->to('/admin/pemesanan'); // ✅ FIX
+        return redirect()->to('/admin/pemesanan'); 
     }
 
-    // 🔥 KIRIM + KURANGI STOK
+    // KIRIM + KURANGI STOK
     public function kirim($id)
     {
         $db = \Config\Database::connect();
@@ -44,7 +44,7 @@ class Pemesanan extends BaseController
             ->get()
             ->getRowArray();
 
-        // 🔥 VALIDASI STOK
+        // VALIDASI STOK
         $bahan = $db->table('bahan_baku')
             ->where('id_bahan', $pesanan['id_bahan'])
             ->get()
@@ -54,13 +54,13 @@ class Pemesanan extends BaseController
             return redirect()->back()->with('error', 'Stok tidak cukup!');
         }
 
-        // 🔥 KURANGI STOK
+        // KURANGI STOK
         $db->table('bahan_baku')
             ->where('id_bahan', $pesanan['id_bahan'])
             ->set('stok', 'stok - '.$pesanan['jumlah'], false)
             ->update();
 
-        // 🔥 UPDATE STATUS
+        // UPDATE STATUS
         $db->table('pemesanan_bahan')
             ->where('id_pemesanan', $id)
             ->update([
@@ -70,7 +70,7 @@ class Pemesanan extends BaseController
         return redirect()->to('/admin/pemesanan');
     }
 
-    // 🔥 SELESAI
+    // SELESAI
     public function selesai($id)
     {
         $db = \Config\Database::connect();
@@ -84,7 +84,7 @@ class Pemesanan extends BaseController
         return redirect()->to('/admin/pemesanan');
     }
 
-    // 🔥 TOLAK
+    // TOLAK
     public function tolak($id)
     {
         $db = \Config\Database::connect();

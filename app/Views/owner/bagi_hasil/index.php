@@ -3,7 +3,7 @@
 
 <h3>Laporan Bagi Hasil Semua Cabang</h3>
 
-<!-- 🔥 FILTER -->
+<!-- FILTER -->
 <form method="get" class="row mb-3">
 
     <div class="col-md-3">
@@ -25,7 +25,7 @@
 
 </form>
 
-<!-- 🔥 TABEL -->
+<!-- TABEL -->
 <table class="table table-bordered table-striped">
 <thead class="table-dark">
 <tr>

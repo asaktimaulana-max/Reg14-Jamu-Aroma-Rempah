@@ -10,7 +10,7 @@ class Dashboard extends BaseController
     {
         $db = \Config\Database::connect();
 
-        // 🔥 TOTAL OMSET
+        // TOTAL OMSET
         $totalOmset = $db->table('penjualan')
             ->selectSum('total')
             ->get()
@@ -18,15 +18,15 @@ class Dashboard extends BaseController
 
         $totalOmset = $totalOmset->total ?? 0;
 
-        // 🔥 TOTAL CABANG
+        // TOTAL CABANG
         $totalCabang = $db->table('franchise')
             ->countAllResults();
 
-        // 🔥 TOTAL TRANSAKSI
+        // TOTAL TRANSAKSI
         $totalTransaksi = $db->table('penjualan')
             ->countAllResults();
 
-        // 🔥 GRAFIK BULANAN
+        // GRAFIK BULANAN
         $grafik = $db->table('penjualan')
             ->select("DATE_FORMAT(tanggal,'%Y-%m') as bulan, SUM(total) as total")
             ->groupBy("DATE_FORMAT(tanggal,'%Y-%m')")
@@ -42,7 +42,7 @@ class Dashboard extends BaseController
             $total[] = (int)$row->total;
         }
 
-        // 🔥 GRAFIK PER CABANG + RANKING
+        // GRAFIK PER CABANG + RANKING
         $cabang = $db->table('penjualan p')
             ->select('f.nama_cabang, SUM(p.total) as total')
             ->join('franchise f', 'f.id_franchise = p.id_franchise')
@@ -67,7 +67,7 @@ class Dashboard extends BaseController
             'total' => $total,
             'namaCabang' => $namaCabang,
             'totalCabangChart' => $totalCabangChart,
-            'rankingCabang' => $cabang // 🔥 buat ranking
+            'rankingCabang' => $cabang // ranking
         ]);
     }
 }

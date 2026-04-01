@@ -13,7 +13,7 @@
 
 /* ===== TITLE ===== */
 h3 {
-    color: #000; /* HITAM sesuai request */
+    color: #000; 
     font-weight: 600;
 }
 
@@ -33,7 +33,7 @@ h3 {
     padding: 12px;
 }
 
-/* BODY (NO CREAM) */
+/* BODY */
 .table-jamu tbody tr {
     background-color: #ffffff;
 }

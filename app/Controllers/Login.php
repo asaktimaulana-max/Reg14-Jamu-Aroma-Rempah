@@ -39,7 +39,7 @@ class Login extends Controller
             'logged_in'    => true
         ]);
 
-        // 🔥 redirect sesuai role
+        // redirect sesuai role
         switch ($user['role']) {
             case 'admin':
                 return redirect()->to('/admin/dashboard');

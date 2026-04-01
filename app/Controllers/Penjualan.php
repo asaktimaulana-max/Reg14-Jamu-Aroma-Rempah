@@ -18,7 +18,7 @@ class Penjualan extends BaseController
         $cabang  = $this->request->getGet('cabang');
         $tanggal = $this->request->getGet('tanggal');
 
-        // 🔥 PAGINATION
+        // PAGINATION
         $limit = 10;
         $page  = (int) ($this->request->getGet('page') ?? 1);
         $offset = ($page - 1) * $limit;
@@ -155,7 +155,7 @@ class Penjualan extends BaseController
     }
 
 
-    // 🔥 LAPORAN + PAGINATION
+    // LAPORAN + PAGINATION
     public function laporan()
     {
         $db = \Config\Database::connect();

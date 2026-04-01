@@ -15,7 +15,7 @@
 
 <div class="card-body">
 
-<!-- 🔥 FILTER CABANG -->
+<!-- FILTER CABANG -->
 <form method="get" class="row mb-3">
 
     <div class="col-md-4">
@@ -41,7 +41,7 @@
 
 </form>
 
-<!-- 🔥 TABEL -->
+<!-- TABEL -->
 <table class="table table-bordered table-striped text-center align-middle">
 
 <thead class="table-dark">
@@ -85,7 +85,7 @@ foreach($penjualan as $p):
 
 </table>
 
-<!-- 🔥 PAGINATION MANUAL -->
+<!-- PAGINATION MANUAL -->
 <div class="d-flex justify-content-center mt-3">
 
 <?php if($currentPage > 1): ?>

@@ -25,10 +25,10 @@ class BagiHasil extends BaseController
         $db = \Config\Database::connect();
         $id_franchise = session()->get('id_franchise');
 
-        // 🔥 periode sekarang (YYYY-MM)
+        // periode sekarang (YYYY-MM)
         $periode = date('Y-m');
 
-        // 🔥 CEK BIAR TIDAK DOUBLE
+        // CEK BIAR TIDAK DOUBLE
         $cek = $db->table('bagi_hasil')
             ->where('id_franchise', $id_franchise)
             ->where('periode', $periode)
@@ -38,7 +38,7 @@ class BagiHasil extends BaseController
             return redirect()->back()->with('error', 'Bagi hasil bulan ini sudah dibuat!');
         }
 
-        // 🔥 HITUNG TOTAL OMSET BULAN INI
+        // HITUNG TOTAL OMSET BULAN INI
         $total = $db->table('penjualan')
             ->selectSum('total')
             ->where('id_franchise', $id_franchise)
@@ -47,11 +47,11 @@ class BagiHasil extends BaseController
             ->getRow()
             ->total ?? 0;
 
-        // 🔥 BAGI HASIL
+        // BAGI HASIL
         $bagi_pusat = $total * 0.2;
         $bagi_mitra = $total * 0.8;
 
-        // 🔥 SIMPAN
+        // SIMPAN
         $db->table('bagi_hasil')->insert([
             'id_franchise' => $id_franchise,
             'periode' => $periode,
