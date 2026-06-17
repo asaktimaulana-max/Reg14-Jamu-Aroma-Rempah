@@ -215,7 +215,7 @@
         <!-- TOPBAR -->
         <nav class="topbar">
             <div class="d-flex align-items-center">
-                <h5 class="mb-0 fw-bold text-secondary">Sistem Monitoring Jamu</h5>
+                <h5 class="mb-0 fw-bold text-secondary">Sistem Pengelolaan Jamu</h5>
             </div>
             <div class="d-flex align-items-center">
                 <div class="dropdown">

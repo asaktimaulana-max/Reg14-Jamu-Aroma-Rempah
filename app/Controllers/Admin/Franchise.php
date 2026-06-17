@@ -62,10 +62,28 @@ class Franchise extends BaseController
 
     public function hapus($id)
     {
-        $model = new FranchiseModel();
+        $db = \Config\Database::connect();
 
+        $db->table('bagi_hasil')
+            ->where('id_franchise', $id)
+            ->delete();
+
+        $db->table('pemesanan_bahan')
+            ->where('id_franchise', $id)
+            ->delete();
+
+        $db->table('user')
+            ->where('id_franchise', $id)
+            ->delete();
+
+        $db->table('penjualan')
+            ->where('id_franchise', $id)
+            ->delete();
+
+        $model = new FranchiseModel();
         $model->delete($id);
 
-        return redirect()->to('/admin/franchise');
+        return redirect()->to('/admin/franchise')
+            ->with('success', 'Data franchise berhasil dihapus.');
     }
 }
