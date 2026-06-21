@@ -24,11 +24,16 @@ class Login extends Controller
             ->getRowArray();
 
         if (!$user) {
-            return redirect()->back()->with('error', 'Username tidak ditemukan');
+            return redirect()->back()
+                ->with('error', 'Username tidak ditemukan');
         }
 
-        if ($password != $user['password']) {
-            return redirect()->back()->with('error', 'Password salah');
+        if (
+            !password_verify($password, $user['password'])
+            && $password != $user['password']
+        ) {
+            return redirect()->back()
+                ->with('error', 'Password salah');
         }
 
         session()->set([
@@ -40,12 +45,16 @@ class Login extends Controller
         ]);
 
         switch ($user['role']) {
+
             case 'admin':
                 return redirect()->to('/admin/dashboard');
+
             case 'mitra':
                 return redirect()->to('/mitra/dashboard');
+
             case 'owner':
                 return redirect()->to('/owner/dashboard');
+
             default:
                 return redirect()->to('/login');
         }
@@ -54,6 +63,7 @@ class Login extends Controller
     public function logout()
     {
         session()->destroy();
+
         return redirect()->to('/login');
     }
 }

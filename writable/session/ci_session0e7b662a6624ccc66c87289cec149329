@@ -1,1 +1,0 @@
-__ci_last_regenerate|i:1781610458;_ci_previous_url|s:47:"http://localhost:8080/index.php/admin/franchise";id_user|s:1:"1";username|s:5:"admin";role|s:5:"admin";id_franchise|N;logged_in|b:1;error|s:76:"Data franchise tidak dapat dihapus karena masih memiliki data yang berelasi.";__ci_vars|a:1:{s:5:"error";s:3:"old";}

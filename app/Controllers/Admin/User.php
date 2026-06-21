@@ -9,7 +9,7 @@ class User extends BaseController
     public function index()
     {
         $db = \Config\Database::connect();
-        
+
         $data['users'] = $db->table('user u')
             ->select('u.*, f.nama_cabang, f.pemilik')
             ->join('franchise f', 'f.id_franchise = u.id_franchise', 'left')
@@ -24,8 +24,10 @@ class User extends BaseController
     public function tambah()
     {
         $db = \Config\Database::connect();
-        
-        $data['franchise'] = $db->table('franchise')->get()->getResultArray();
+
+        $data['franchise'] = $db->table('franchise')
+            ->get()
+            ->getResultArray();
 
         return view('admin/user/tambah', $data);
     }
@@ -34,28 +36,43 @@ class User extends BaseController
     {
         $db = \Config\Database::connect();
 
-        $data = [
-            'username'     => $this->request->getPost('username'),
-            'password'     => $this->request->getPost('password'), 
-            'role'         => 'mitra',
-            'id_franchise' => $this->request->getPost('id_franchise')
-        ];
+        $username = $this->request->getPost('username');
+        $password = $this->request->getPost('password');
+        $id_franchise = $this->request->getPost('id_franchise');
 
-        $cek = $db->table('user')->where('username', $data['username'])->countAllResults();
+        // cek username
+        $cek = $db->table('user')
+            ->where('username', $username)
+            ->countAllResults();
+
         if ($cek > 0) {
-            return redirect()->back()->withInput()->with('error', 'Username sudah digunakan');
+            return redirect()->back()
+                ->withInput()
+                ->with('error', 'Username sudah digunakan');
         }
+
+        $data = [
+            'username'     => $username,
+            'password'     => password_hash($password, PASSWORD_DEFAULT),
+            'role'         => 'mitra',
+            'id_franchise' => $id_franchise
+        ];
 
         $db->table('user')->insert($data);
 
-        return redirect()->to('/admin/user')->with('success', 'User mitra berhasil ditambahkan');
+        return redirect()->to('/admin/user')
+            ->with('success', 'User mitra berhasil ditambahkan');
     }
 
     public function hapus($id)
     {
         $db = \Config\Database::connect();
-        $db->table('user')->where('id_user', $id)->delete();
 
-        return redirect()->to('/admin/user')->with('success', 'User mitra berhasil dihapus');
+        $db->table('user')
+            ->where('id_user', $id)
+            ->delete();
+
+        return redirect()->to('/admin/user')
+            ->with('success', 'User mitra berhasil dihapus');
     }
 }
